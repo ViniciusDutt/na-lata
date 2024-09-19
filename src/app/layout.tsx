@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Advent_Pro } from "next/font/google";
 import "./globals.css";
-import { AdSense } from "../../components/index";
+import AdSense from "@/components/AdSense";
 
 const advent = Advent_Pro({ subsets: ["latin"] });
 

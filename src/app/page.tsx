@@ -1,11 +1,17 @@
 "use client";
 
-import { AdBanner, Lata } from "@/../components/index";
+import { AdBanner, Lata } from "@/components/index";
 import { useState } from "react";
 import "remixicon/fonts/remixicon.css";
-import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
-  arrayMove,
+  DndContext,
+  MouseSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
   arraySwap,
   rectSwappingStrategy,
   SortableContext,
@@ -13,6 +19,7 @@ import {
 
 export default function Home() {
   const data = new Date();
+
   const today = `${data.getDate()}/${
     data.getMonth() + 1
   }/${data.getFullYear()}`;
@@ -27,8 +34,14 @@ export default function Home() {
     "lata7",
     "lata8",
   ]);
+
   const [playCount, setPlayCount] = useState(0);
   const [tipCount, setTipCount] = useState(0);
+
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+
+  const sensors = useSensors(mouseSensor, touchSensor);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -151,6 +164,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-4 gap-2 justify-center items-center">
             <DndContext
+              sensors={sensors}
               collisionDetection={closestCenter}
               onDragEnd={handleDragEnd}
             >

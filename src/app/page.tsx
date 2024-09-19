@@ -1,7 +1,7 @@
 "use client";
 
 import { AdBanner, Lata } from "@/components/index";
-import { useState } from "react";
+import { use, useState } from "react";
 import "remixicon/fonts/remixicon.css";
 import {
   DndContext,
@@ -16,6 +16,7 @@ import {
   rectSwappingStrategy,
   SortableContext,
 } from "@dnd-kit/sortable";
+import { transform } from "next/dist/build/swc";
 
 export default function Home() {
   const data = new Date();
@@ -34,6 +35,8 @@ export default function Home() {
     "lata7",
     "lata8",
   ]);
+
+  const [historico, setHistorico] = useState([""]);
 
   const [playCount, setPlayCount] = useState(0);
   const [tipCount, setTipCount] = useState(0);
@@ -58,11 +61,26 @@ export default function Home() {
   const TestBtn = (e: any) => {
     e.preventDefault();
     setPlayCount(playCount + 1);
+    setHistorico(latas);
+    checkAnswer();
+    historyAnim();
   };
 
   const TipBtn = (e: any) => {
     e.preventDefault();
     setTipCount(tipCount + 1);
+  };
+
+  const historyAnim = () => {
+    const history = document.getElementById("history");
+    history!.classList.add("animate");
+    setTimeout(() => {
+      history!.classList.remove("animate");
+    }, 500);
+  };
+
+  const checkAnswer = () => {
+    console.log("checando");
   };
 
   return (
@@ -94,14 +112,11 @@ export default function Home() {
                   }
                 ></i>
               </button>
-              <button className="flex items-center">
-                <i className="ri-question-line ri-xl text-white"></i>
-              </button>
             </div>
             <p className="text-white font-bold text-xl">NA LATA</p>
             <div className="flex gap-4">
               <button className="flex items-center">
-                <i className="ri-settings-4-line ri-xl text-white"></i>
+                <i className="ri-question-line ri-xl text-white"></i>
               </button>
             </div>
           </nav>
@@ -109,31 +124,16 @@ export default function Home() {
 
         <main className="flex flex-col w-full gap-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="grid grid-cols-4 gap-2 w-full justify-center items-center">
-              <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                <i className="ri-settings-4-line ri-1x text-white"></i>
-              </div>
-              <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                <i className="ri-settings-4-line ri-1x text-white"></i>
-              </div>
-              <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                <i className="ri-settings-4-line ri-1x text-white"></i>
-              </div>
-              <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                <i className="ri-settings-4-line ri-1x text-white"></i>
-              </div>
-              <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                <i className="ri-settings-4-line ri-1x text-white"></i>
-              </div>
-              <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                <i className="ri-settings-4-line ri-1x text-white"></i>
-              </div>
-              <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                <i className="ri-settings-4-line ri-1x text-white"></i>
-              </div>
-              <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                <i className="ri-settings-4-line ri-1x text-white"></i>
-              </div>
+            <div
+              id="history"
+              className="grid grid-cols-4 gap-2 w-full justify-center items-center"
+            >
+              {playCount > 0 &&
+                historico.map((lata) => (
+                  <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
+                    <Lata key={lata} id={lata} />
+                  </div>
+                ))}
             </div>
             <div className="flex h-full w-full justify-between">
               <div className="flex flex-col items-center justify-between h-full">
@@ -176,30 +176,6 @@ export default function Home() {
                 ))}
               </SortableContext>
             </DndContext>
-            {/* <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-              <i className="ri-settings-4-line ri-4x text-white"></i>
-            </div>
-            <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-              <i className="ri-settings-4-line ri-4x text-white"></i>
-            </div>
-            <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-              <i className="ri-settings-4-line ri-4x text-white"></i>
-            </div>
-            <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-              <i className="ri-settings-4-line ri-4x text-white"></i>
-            </div>
-            <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-              <i className="ri-settings-4-line ri-4x text-white"></i>
-            </div>
-            <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-              <i className="ri-settings-4-line ri-4x text-white"></i>
-            </div>
-            <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-              <i className="ri-settings-4-line ri-4x text-white"></i>
-            </div>
-            <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-              <i className="ri-settings-4-line ri-4x text-white"></i>
-            </div> */}
           </div>
           <button
             onClick={TestBtn}

@@ -10,3 +10,33 @@
   box-sizing: border-box;
   color: white;
 }
+
+.animate {
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+	        animation: slide-top 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+            opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+            opacity: 100;
+  }
+}
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+            opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+            opacity: 100;
+  }
+}

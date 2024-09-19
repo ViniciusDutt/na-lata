@@ -12,6 +12,10 @@ import {
 } from "@dnd-kit/sortable";
 
 export default function Home() {
+  const data = new Date();
+  const today = `${data.getDate()}/${
+    data.getMonth() + 1
+  }/${data.getFullYear()}`;
   const [mode, setMode] = useState(false);
   const [latas, setLatas] = useState([
     "lata1",
@@ -23,6 +27,8 @@ export default function Home() {
     "lata7",
     "lata8",
   ]);
+  const [playCount, setPlayCount] = useState(0);
+  const [tipCount, setTipCount] = useState(0);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -34,6 +40,16 @@ export default function Home() {
         return arraySwap(items, activeIndex, overIndex);
       });
     }
+  };
+
+  const TestBtn = (e: any) => {
+    e.preventDefault();
+    setPlayCount(playCount + 1);
+  };
+
+  const TipBtn = (e: any) => {
+    e.preventDefault();
+    setTipCount(tipCount + 1);
   };
 
   return (
@@ -114,17 +130,20 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col items-end justify-between h-full">
-                <button className="py-1 px-2 bg-background-200 flex gap-1 items-center rounded-md shadow-[0_4px_0_0_rgba(68,53,91,_0.35)] mb-2">
+                <button
+                  onClick={TipBtn}
+                  className="py-1 px-2 bg-background-200 flex gap-1 items-center rounded-md shadow-[0_4px_0_0_rgba(68,53,91,_0.35)] mb-2"
+                >
                   <i className="ri-lightbulb-line"></i>
                   <p className="font-bold">Dica</p>
                 </button>
                 <div className="flex flex-col items-end">
-                  <p className="font-bold">09/09/2024</p>
+                  <p className="font-bold">{today}</p>
                   <p>
-                    TENTATIVAS: <b>2</b>
+                    TENTATIVAS: <b>{playCount}</b>
                   </p>
                   <p>
-                    DICAS: <b>2</b>
+                    DICAS: <b>{tipCount}</b>
                   </p>
                 </div>
               </div>
@@ -168,7 +187,10 @@ export default function Home() {
               <i className="ri-settings-4-line ri-4x text-white"></i>
             </div> */}
           </div>
-          <button className="flex items-center justify-center py-2 bg-primary font-bold shadow-[0_4px_0_0_rgba(236,167,44,_0.35)] rounded-xl text-2xl">
+          <button
+            onClick={TestBtn}
+            className="flex items-center justify-center py-2 bg-primary font-bold shadow-[0_4px_0_0_rgba(236,167,44,_0.35)] rounded-xl text-2xl"
+          >
             Testar
           </button>
         </main>

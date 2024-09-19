@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Advent_Pro } from "next/font/google";
 import "./globals.css";
-import AdSense from "../../components/AdSense";
-import { Instructions } from "../../components";
+import { AdSense } from "../../components/index";
 
 const advent = Advent_Pro({ subsets: ["latin"] });
 
@@ -19,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <head>
-        <AdSense pId="ca-pub-4376799718757310" />
+        <AdSense pId={process.env.GOOGLE_DATA_AD!} />
       </head>
       <body
         className={`${advent.className} antialiased bg-background-100 flex justify-center`}

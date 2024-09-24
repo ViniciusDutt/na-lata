@@ -1,5 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import Image from "next/image";
 
 const Lata = (props: any) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -10,7 +11,13 @@ const Lata = (props: any) => {
   };
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <h1 className="bg-slate-600">{props.id}</h1>
+      <Image
+        src={`/${props.id}.svg`}
+        alt={props.id}
+        width={props.width}
+        height={1}
+        className="select-none"
+      ></Image>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
-import { AdBanner, Lata } from "@/components/index";
-import { use, useState } from "react";
+import { AdBanner, Lata, Instructions } from "@/components/index";
+import { useEffect, useState } from "react";
 import "remixicon/fonts/remixicon.css";
 import {
   DndContext,
@@ -16,7 +16,7 @@ import {
   rectSwappingStrategy,
   SortableContext,
 } from "@dnd-kit/sortable";
-import { transform } from "next/dist/build/swc";
+import dayjs from "dayjs";
 
 export default function Home() {
   const data = new Date();
@@ -36,15 +36,48 @@ export default function Home() {
     "lata8",
   ]);
 
-  const [historico, setHistorico] = useState([""]);
+  const defaultSort = [
+    "lata1",
+    "lata2",
+    "lata3",
+    "lata4",
+    "lata5",
+    "lata6",
+    "lata7",
+    "lata8",
+  ];
+  const [lastPlay, setLastPlay] = useState([""]);
 
   const [playCount, setPlayCount] = useState(0);
   const [tipCount, setTipCount] = useState(0);
-
+  const [easy, setEasy] = useState(false);
+  const [correctPositions, setCorrectPositions] = useState(0);
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
+  const [isOpen, setIsOpen] = useState(true);
 
   const sensors = useSensors(mouseSensor, touchSensor);
+
+  function shuffleArray(array: string[], seed: number): string[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const randomIndex = (seed + i) % (i + 1);
+      [shuffled[i], shuffled[randomIndex]] = [
+        shuffled[randomIndex],
+        shuffled[i],
+      ];
+    }
+    return shuffled;
+  }
+
+  function generateDailyChallenge(): string[] {
+    const today = dayjs().format("YYYYMMDD");
+    const seed = parseInt(today, 10);
+
+    const challenge = shuffleArray(defaultSort, seed);
+
+    return challenge;
+  }
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -58,17 +91,10 @@ export default function Home() {
     }
   };
 
-  const TestBtn = (e: any) => {
-    e.preventDefault();
-    setPlayCount(playCount + 1);
-    setHistorico(latas);
-    checkAnswer();
-    historyAnim();
-  };
-
   const TipBtn = (e: any) => {
     e.preventDefault();
     setTipCount(tipCount + 1);
+    setEasy(true);
   };
 
   const historyAnim = () => {
@@ -79,12 +105,69 @@ export default function Home() {
     }, 500);
   };
 
-  const checkAnswer = () => {
-    console.log("checando");
+  function compareArrays(
+    arr1: any[],
+    arr2: any[]
+  ): { index: number; correct: boolean }[] {
+    let correctCount = 0;
+    const results: { index: number; correct: boolean }[] = [];
+
+    const length = Math.min(arr1.length, arr2.length);
+
+    for (let i = 0; i < length; i++) {
+      const isCorrect = arr1[i] === arr2[i];
+      results.push({ index: i, correct: isCorrect });
+
+      if (isCorrect) {
+        correctCount++;
+      }
+    }
+
+    setCorrectPositions(correctCount);
+
+    return results;
+  }
+
+  useEffect(() => {
+    if (correctPositions === 8) {
+      checkAnswer();
+    }
+  }, [correctPositions]); // O useEffect roda sempre que 'correctPositions' mudar
+
+  function checkAnswer() {
+    console.log(latas);
+    console.log(generateDailyChallenge());
+    compareArrays(latas, generateDailyChallenge());
+    // if (compareArrays(latas, generateDailyChallenge())) {
+
+    //   // Salva no localStorage para indicar que o jogo foi completado
+    //   const timeNow = new Date().getTime();
+    //   const countdownDuration = 24 * 60 * 60 * 1000; // 24 horas em ms
+    //   const nextChallengeTime = timeNow + countdownDuration;
+
+    //   localStorage.setItem("gameCompleted", "true");
+    //   localStorage.setItem("dicasUsadas", dicas.toString()); // Usa o estado existente de dicas
+    //   localStorage.setItem("tentativasUsadas", tentativas.toString()); // Usa o estado existente de tentativas
+    //   localStorage.setItem("nextChallengeTime", nextChallengeTime.toString());
+
+    //   // Chame a função que exibe o modal fora do checkAnswer, já que isso é tratado externamente
+    //   showVictoryModal();
+    // } else {
+    //   console.log("Ainda não ganhou.");
+    // }
+  }
+
+  const TestBtn = (e: any) => {
+    e.preventDefault();
+    setPlayCount(playCount + 1);
+    setLastPlay(latas);
+    checkAnswer();
+    historyAnim();
   };
 
   return (
     <div className="flex flex-col items-center justify-center py-6 px-2 w-full max-w-[512px]">
+      <Instructions isOpen={isOpen} setIsOpen={setIsOpen} />
       <section className="w-full flex flex-col gap-24">
         <div>
           <div
@@ -115,7 +198,10 @@ export default function Home() {
             </div>
             <p className="text-white font-bold text-xl">NA LATA</p>
             <div className="flex gap-4">
-              <button className="flex items-center">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center"
+              >
                 <i className="ri-question-line ri-xl text-white"></i>
               </button>
             </div>
@@ -129,9 +215,9 @@ export default function Home() {
               className="grid grid-cols-4 gap-2 w-full justify-center items-center"
             >
               {playCount > 0 &&
-                historico.map((lata) => (
+                lastPlay.map((lata) => (
                   <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                    <Lata key={lata} id={lata} />
+                    <Lata key={lata} id={lata} width={16} />
                   </div>
                 ))}
             </div>
@@ -139,7 +225,7 @@ export default function Home() {
               <div className="flex flex-col items-center justify-between h-full">
                 <p className="text-center">POSIÇÕES CERTAS:</p>
                 <p className="font-bold text-[#2DED7E] text-[64px] leading-10 pb-2 text-center">
-                  2
+                  {correctPositions}
                 </p>
               </div>
               <div className="flex flex-col items-end justify-between h-full">
@@ -171,7 +257,7 @@ export default function Home() {
               <SortableContext items={latas} strategy={rectSwappingStrategy}>
                 {latas.map((lata) => (
                   <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-                    <Lata key={lata} id={lata} />
+                    <Lata key={lata} id={lata} width={32} />
                   </div>
                 ))}
               </SortableContext>

@@ -67,6 +67,10 @@ export default function Home() {
     if (typeof window !== "undefined") {
       localStorage.setItem("playerWin", JSON.stringify(playerWin));
     }
+    if (playerWin === true) {
+      document.body.classList.add("overflow-y-hidden");
+      window.scrollTo(0, 0);
+    }
   }, [playerWin]);
 
   function shuffleArray(array: string[], seed: number): string[] {
@@ -157,6 +161,9 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center py-6 px-2 w-full max-w-[512px]">
       <Instructions isOpen={isOpen} setIsOpen={setIsOpen} />
       <WinModal isOpen={playerWin} playCount={playCount} tipCount={tipCount} />
+      <div className="w-full flex justify-center absolute top-0">
+        <p>Jogo em versão de testes</p>
+      </div>
       <section className="w-full flex flex-col gap-24">
         <div>
           {/* <div
@@ -267,17 +274,12 @@ export default function Home() {
         </main>
       </section>
 
-      <div className="absolute bottom-0 flex justify-center w-full">
-        <div className="w-full flex justify-center ">
-          <p>Jogo em versão de testes</p>
-        </div>
-        <div className="h-[60px]">
-          <AdBanner
-            dataAdFormat="auto"
-            dataFullWidthResponsive={true}
-            dataAdSlot="7346383496"
-          />
-        </div>
+      <div className="w-full h-[60px]">
+        <AdBanner
+          dataAdFormat="auto"
+          dataFullWidthResponsive={true}
+          dataAdSlot="7346383496"
+        />
       </div>
     </div>
   );

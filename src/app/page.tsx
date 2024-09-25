@@ -176,8 +176,8 @@ export default function Home() {
             <button className="text-white font-bold h-full px-6">Hexa</button>
             <button className="text-white font-bold h-full px-6">Octa</button>
           </div> */}
-          <nav className="w-full flex justify-between items-center">
-            <div className="flex gap-4">
+          <nav className="w-full grid grid-cols-3 justify-between items-center">
+            <div className="self-center flex gap-4">
               {/* <button
                 className="flex items-center"
                 onClick={() => {
@@ -192,8 +192,10 @@ export default function Home() {
                 ></i>
               </button> */}
             </div>
-            <p className="text-white font-bold text-xl">NA LATA</p>
-            <div className="flex gap-4">
+            <p className="text-white font-bold text-xl flex justify-center items-center">
+              NA LATA
+            </p>
+            <div className="flex justify-end items-center gap-4">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center"

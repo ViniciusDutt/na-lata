@@ -24,7 +24,7 @@ export default function Home() {
   const today = `${data.getDate()}/${
     data.getMonth() + 1
   }/${data.getFullYear()}`;
-  const [mode, setMode] = useState(false);
+  // const [mode, setMode] = useState(false);
   const [latas, setLatas] = useState([
     "lata1",
     "lata2",
@@ -49,18 +49,18 @@ export default function Home() {
   const [lastPlay, setLastPlay] = useState([""]);
   const [playCount, setPlayCount] = useState(0);
   const [tipCount, setTipCount] = useState(0);
-  const [easy, setEasy] = useState(false);
+  // const [easy, setEasy] = useState(false);
   const [correctPositions, setCorrectPositions] = useState(0);
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
   const [isOpen, setIsOpen] = useState(true);
   const [playerWin, setPlayerWin] = useState(false);
-  const [playerWinSave, setPlayerWinSave] = useState(() => {
-    if (typeof window !== "undefined") {
-      const playerWinSave = localStorage.getItem("playerWin");
-      return playerWinSave ? JSON.parse(playerWinSave) : false;
-    }
-  });
+  // const [playerWinSave, setPlayerWinSave] = useState(() => {
+  //   if (typeof window !== "undefined") {
+  //     const playerWinSave = localStorage.getItem("playerWin");
+  //     return playerWinSave ? JSON.parse(playerWinSave) : false;
+  //   }
+  // });
   const sensors = useSensors(mouseSensor, touchSensor);
 
   useEffect(() => {
@@ -105,7 +105,7 @@ export default function Home() {
   const TipBtn = (e: any) => {
     e.preventDefault();
     setTipCount(tipCount + 1);
-    setEasy(true);
+    // setEasy(true);
   };
 
   const historyAnim = () => {
@@ -159,7 +159,7 @@ export default function Home() {
       <WinModal isOpen={playerWin} playCount={playCount} tipCount={tipCount} />
       <section className="w-full flex flex-col gap-24">
         <div>
-          <div
+          {/* <div
             className={
               (mode ? "h-14 mb-6" : "h-0 mb-0") +
               ` flex items-center transition-all rounded-lg bg-background-200 overflow-hidden`
@@ -168,7 +168,7 @@ export default function Home() {
             <button className="text-white font-bold h-full px-6">Tetra</button>
             <button className="text-white font-bold h-full px-6">Hexa</button>
             <button className="text-white font-bold h-full px-6">Octa</button>
-          </div>
+          </div> */}
           <nav className="w-full flex justify-between items-center">
             <div className="flex gap-4">
               {/* <button

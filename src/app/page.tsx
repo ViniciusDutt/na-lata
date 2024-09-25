@@ -1,6 +1,6 @@
 "use client";
 
-import { AdBanner, Lata, Instructions } from "@/components/index";
+import { AdBanner, Lata, Instructions, WinModal } from "@/components/index";
 import { useEffect, useState } from "react";
 import "remixicon/fonts/remixicon.css";
 import {
@@ -47,7 +47,6 @@ export default function Home() {
     "lata8",
   ];
   const [lastPlay, setLastPlay] = useState([""]);
-
   const [playCount, setPlayCount] = useState(0);
   const [tipCount, setTipCount] = useState(0);
   const [easy, setEasy] = useState(false);
@@ -55,8 +54,22 @@ export default function Home() {
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
   const [isOpen, setIsOpen] = useState(true);
-
+  const [playerWin, setPlayerWin] = useState(false);
+  const [playerWinSave, setPlayerWinSave] = useState(() => {
+    if (typeof window !== "undefined") {
+      const playerWinSave = localStorage.getItem("playerWin");
+      return playerWinSave ? JSON.parse(playerWinSave) : false;
+    }
+  });
   const sensors = useSensors(mouseSensor, touchSensor);
+
+  console.log(playerWinSave);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("playerWin", JSON.stringify(playerWin));
+    }
+  }, [playerWin]);
 
   function shuffleArray(array: string[], seed: number): string[] {
     const shuffled = [...array];
@@ -130,44 +143,22 @@ export default function Home() {
 
   useEffect(() => {
     if (correctPositions === 8) {
-      checkAnswer();
+      setPlayerWin(true);
     }
-  }, [correctPositions]); // O useEffect roda sempre que 'correctPositions' mudar
-
-  function checkAnswer() {
-    console.log(latas);
-    console.log(generateDailyChallenge());
-    compareArrays(latas, generateDailyChallenge());
-    // if (compareArrays(latas, generateDailyChallenge())) {
-
-    //   // Salva no localStorage para indicar que o jogo foi completado
-    //   const timeNow = new Date().getTime();
-    //   const countdownDuration = 24 * 60 * 60 * 1000; // 24 horas em ms
-    //   const nextChallengeTime = timeNow + countdownDuration;
-
-    //   localStorage.setItem("gameCompleted", "true");
-    //   localStorage.setItem("dicasUsadas", dicas.toString()); // Usa o estado existente de dicas
-    //   localStorage.setItem("tentativasUsadas", tentativas.toString()); // Usa o estado existente de tentativas
-    //   localStorage.setItem("nextChallengeTime", nextChallengeTime.toString());
-
-    //   // Chame a função que exibe o modal fora do checkAnswer, já que isso é tratado externamente
-    //   showVictoryModal();
-    // } else {
-    //   console.log("Ainda não ganhou.");
-    // }
-  }
+  }, [correctPositions]);
 
   const TestBtn = (e: any) => {
     e.preventDefault();
     setPlayCount(playCount + 1);
     setLastPlay(latas);
-    checkAnswer();
+    compareArrays(latas, generateDailyChallenge());
     historyAnim();
   };
 
   return (
     <div className="flex flex-col items-center justify-center py-6 px-2 w-full max-w-[512px]">
       <Instructions isOpen={isOpen} setIsOpen={setIsOpen} />
+      <WinModal isOpen={playerWin} playCount={playCount} tipCount={tipCount} />
       <section className="w-full flex flex-col gap-24">
         <div>
           <div
@@ -182,7 +173,7 @@ export default function Home() {
           </div>
           <nav className="w-full flex justify-between items-center">
             <div className="flex gap-4">
-              <button
+              {/* <button
                 className="flex items-center"
                 onClick={() => {
                   setMode(!mode);
@@ -194,7 +185,7 @@ export default function Home() {
                     ` ri-arrow-down-s-line ri-xl text-white transition-all`
                   }
                 ></i>
-              </button>
+              </button> */}
             </div>
             <p className="text-white font-bold text-xl">NA LATA</p>
             <div className="flex gap-4">
@@ -216,8 +207,11 @@ export default function Home() {
             >
               {playCount > 0 &&
                 lastPlay.map((lata) => (
-                  <div className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]">
-                    <Lata key={lata} id={lata} width={16} />
+                  <div
+                    key={lata}
+                    className="w-full h-[48px] bg-background-200 flex justify-center items-center rounded-md shadow-[0_2px_0_0_rgba(68,53,91,_0.35)]"
+                  >
+                    <Lata id={lata} width={16} />
                   </div>
                 ))}
             </div>
@@ -256,8 +250,11 @@ export default function Home() {
             >
               <SortableContext items={latas} strategy={rectSwappingStrategy}>
                 {latas.map((lata) => (
-                  <div className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]">
-                    <Lata key={lata} id={lata} width={32} />
+                  <div
+                    key={lata}
+                    className="w-full h-[96px] bg-background-200 flex justify-center items-center rounded-xl shadow-[0_4px_0_0_rgba(68,53,91,_0.35)]"
+                  >
+                    <Lata id={lata} width={32} />
                   </div>
                 ))}
               </SortableContext>
@@ -272,12 +269,17 @@ export default function Home() {
         </main>
       </section>
 
-      <div className="w-full h-[50px]">
-        <AdBanner
-          dataAdFormat="auto"
-          dataFullWidthResponsive={true}
-          dataAdSlot="7346383496"
-        />
+      <div className="absolute bottom-0 flex justify-center w-full">
+        <div className="w-full flex justify-center ">
+          <p>Jogo em versão de testes</p>
+        </div>
+        <div className="h-[60px]">
+          <AdBanner
+            dataAdFormat="auto"
+            dataFullWidthResponsive={true}
+            dataAdSlot="7346383496"
+          />
+        </div>
       </div>
     </div>
   );

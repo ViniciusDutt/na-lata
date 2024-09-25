@@ -67,10 +67,6 @@ export default function Home() {
     if (typeof window !== "undefined") {
       localStorage.setItem("playerWin", JSON.stringify(playerWin));
     }
-    if (playerWin === true) {
-      document.body.classList.add("overflow-y-hidden");
-      window.scrollTo(0, 0);
-    }
   }, [playerWin]);
 
   function shuffleArray(array: string[], seed: number): string[] {
@@ -146,6 +142,8 @@ export default function Home() {
   useEffect(() => {
     if (correctPositions === 8) {
       setPlayerWin(true);
+      document.body.classList.add("overflow-y-hidden");
+      window.scrollTo(0, 0);
     }
   }, [correctPositions]);
 

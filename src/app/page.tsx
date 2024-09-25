@@ -142,7 +142,7 @@ export default function Home() {
   useEffect(() => {
     if (correctPositions === 8) {
       setPlayerWin(true);
-      document.body.classList.add("overflow-y-hidden");
+      document.body.classList.add("overflow-hidden");
       window.scrollTo(0, 0);
     }
   }, [correctPositions]);
@@ -265,12 +265,14 @@ export default function Home() {
               </SortableContext>
             </DndContext>
           </div>
-          <button
-            onClick={TestBtn}
-            className="flex items-center justify-center py-2 bg-primary font-bold shadow-[0_4px_0_0_rgba(236,167,44,_0.35)] rounded-xl text-2xl"
-          >
-            Testar
-          </button>
+          {!playerWin && (
+            <button
+              onClick={TestBtn}
+              className="flex items-center justify-center py-2 bg-primary font-bold shadow-[0_4px_0_0_rgba(236,167,44,_0.35)] rounded-xl text-2xl"
+            >
+              Testar
+            </button>
+          )}
         </main>
       </section>
 

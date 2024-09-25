@@ -8,14 +8,13 @@ const WinModal = ({ isOpen, tipCount, playCount }: any) => {
     >
       <div className="w-full max-w-[512px] gap-6 flex flex-col relative mx-2 bg-background-200 px-6 py-6 rounded-xl">
         <h1 className="text-2xl font-bold">Parabéns!</h1>
-        <p className="text-base">
-          {tipCount === 0 && <p>Você acertou em {playCount} tentativas.</p>}
-          {tipCount > 0 && (
-            <p>
-              Você acertou em {playCount} tentativas usando {tipCount} dicas.
-            </p>
-          )}
-        </p>
+        {tipCount === 0 ? (
+          <p className="text-base">Você acertou em {playCount} tentativas.</p>
+        ) : (
+          <p className="text-base">
+            Você acertou em {playCount} tentativas usando {tipCount} dicas.
+          </p>
+        )}
       </div>
     </div>
   );

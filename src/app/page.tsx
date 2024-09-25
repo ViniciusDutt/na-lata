@@ -63,8 +63,6 @@ export default function Home() {
   });
   const sensors = useSensors(mouseSensor, touchSensor);
 
-  console.log(playerWinSave);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("playerWin", JSON.stringify(playerWin));

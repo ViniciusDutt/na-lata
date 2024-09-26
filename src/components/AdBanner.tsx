@@ -23,7 +23,7 @@ const AdBanner = ({
 
   return (
     <ins
-      className="adsbygoogle"
+      className="adsbygoogle adbanner-customize"
       style={{ display: "block" }}
       data-ad-client={process.env.GOOGLE_DATA_AD}
       data-ad-slot={dataAdSlot}

@@ -7,7 +7,35 @@ const advent = Advent_Pro({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Na Lata",
-  description: "Criado por ViniciusDutt",
+  description:
+    "Jogo de estratégia onde o objetivo é encontrar as posições corretas de todas as latinhas.",
+  keywords: "Jogo, Game, Jogo rápido, Lata, Latinha, can, soda can, minigame",
+  applicationName: "Na Lata",
+  authors: {
+    name: "Vinicius Dutt",
+    url: "https://linkedin.com/in/viniciusdutt",
+  },
+  openGraph: {
+    title: "Na lata",
+    type: "website",
+    url: "https://nalata.co",
+    images: "/nalata8.svg",
+    siteName: "Na Lata",
+    description:
+      "Jogo de estratégia onde o objetivo é encontrar as posições corretas de todas as latinhas.",
+  },
+  appleWebApp: {
+    title: "Na lata",
+    capable: true,
+  },
+  twitter: {
+    title: "Na lata",
+    site: "https://nalata.co",
+    card: "summary",
+    images: "/nalata8.svg",
+    description:
+      "Jogo de estratégia onde o objetivo é encontrar as posições corretas de todas as latinhas.",
+  },
 };
 
 export default function RootLayout({

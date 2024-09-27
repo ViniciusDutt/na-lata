@@ -57,7 +57,7 @@ export default function Home() {
   const [playerWin, setPlayerWin] = useState(false);
   const [playerLose, setPlayerLose] = useState(false);
   const sensors = useSensors(mouseSensor, touchSensor);
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(60);
   const [gameStart, setGameStart] = useState(false);
 
   useEffect(() => {
@@ -195,7 +195,7 @@ export default function Home() {
 
     if (gameMode) {
       setPlayCount(0);
-      setTimer(30);
+      setTimer(60);
     }
 
     if (!gameMode) {

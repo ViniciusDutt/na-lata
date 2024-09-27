@@ -45,7 +45,7 @@ const Instructions = ({
         </div>
         <p className="text-base">
           {gameMode
-            ? "Ao iniciar, você terá um total de 30 segundos para alcançar encontrar as posições das latas."
+            ? "Ao iniciar, você terá um total de 60 segundos para encontrar as posições das latas."
             : 'Após cada tentativa, pressione o botão "Testar" para verificar seu progresso. Você terá 15 jogadas para finalizar o jogo.'}
         </p>
         <button

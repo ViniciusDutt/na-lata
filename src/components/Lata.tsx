@@ -10,7 +10,13 @@ const Lata = (props: any) => {
     transition,
   };
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="select-none"
+      {...attributes}
+      {...listeners}
+    >
       <Image
         src={`/${props.id}.svg`}
         alt={props.id}

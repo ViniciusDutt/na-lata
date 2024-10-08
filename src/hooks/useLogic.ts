@@ -13,6 +13,9 @@ export function useLogic() {
 
   useEffect(() => {
     setDate(new Date());
+  }, []);
+
+  useEffect(() => {
     setToday(
       `${date?.getDate()}/${date?.getMonth() + 1}/${date?.getFullYear()}`
     );

@@ -13,7 +13,7 @@ const Lata = (props: any) => {
     <div
       ref={setNodeRef}
       style={style}
-      className="select-none"
+      className="select-none w-full h-full flex items-center justify-center"
       {...attributes}
       {...listeners}
     >

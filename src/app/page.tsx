@@ -4,6 +4,7 @@ import { Instructions, Modal, Lata, AdBanner } from "@/components";
 import { useLogic } from "@/hooks/useLogic";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import { rectSwappingStrategy, SortableContext } from "@dnd-kit/sortable";
+import "remixicon/fonts/remixicon.css";
 
 export default function Home() {
   const {

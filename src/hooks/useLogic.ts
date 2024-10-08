@@ -7,6 +7,12 @@ import { arraySwap } from "@dnd-kit/sortable";
 import dayjs from "dayjs";
 
 export function useLogic() {
+  const [date, setDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setDate(new Date());
+  }, []);
+
   const data = new Date();
 
   const today = `${data.getDate()}/${

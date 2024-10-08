@@ -12,7 +12,7 @@ const Modal = ({ isOpen, title, body, Button, onClick }: any) => {
         {Button && (
           <button
             onClick={onClick}
-            className="flex items-center justify-center py-2 bg-primary font-bold shadow-[0_4px_0_0_rgba(236,167,44,_0.35)] rounded-xl text-2xl"
+            className="flex items-center justify-center py-2 bg-primary text-black font-bold shadow-[0_4px_0_0_rgba(236,167,44,_0.35)] rounded-xl text-2xl"
           >
             {Button}
           </button>

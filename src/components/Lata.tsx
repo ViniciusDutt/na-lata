@@ -20,10 +20,9 @@ const Lata = (props: any) => {
       <Image
         src={`/${props.id}.svg`}
         alt={props.id}
-        width={props.width}
-        height={32}
-        style={{ width: `${props.width}px`, height: "auto" }}
-        className="select-none"
+        width={0}
+        height={0}
+        className={`select-none ${props.width} h-auto`}
       ></Image>
     </div>
   );

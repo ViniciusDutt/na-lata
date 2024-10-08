@@ -9,7 +9,16 @@ export const metadata: Metadata = {
   title: "Na Lata",
   description:
     "Jogo de estratégia onde o objetivo é encontrar as posições corretas de todas as latinhas.",
-  keywords: "Jogo, Game, Jogo rápido, Lata, Latinha, can, soda can, minigame",
+  keywords: [
+    "Jogo",
+    "Game",
+    "Jogo rápido",
+    "Lata",
+    "Latinha",
+    "can",
+    "soda can",
+    "minigame",
+  ],
   applicationName: "Na Lata",
   authors: {
     name: "Vinicius Dutt",
@@ -26,7 +35,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     title: "Na lata",
-    capable: true,
+    statusBarStyle: "default",
   },
   twitter: {
     title: "Na lata",
@@ -49,7 +58,7 @@ export default function RootLayout({
         <Script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.GOOGLE_DATA_AD}`}
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           crossOrigin="anonymous"
         />
         <link rel="shortcut icon" href="lata8.svg" type="image/x-icon" />

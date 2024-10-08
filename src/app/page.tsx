@@ -106,9 +106,8 @@ export default function Home() {
             <div className="self-center flex gap-4">
               <button
                 className="flex items-center"
-                aria-label="Mostrar/Esconder dicas"
+                aria-label="Mostrar/Esconder modos de jogo"
                 aria-expanded={mode}
-                aria-controls="tips"
                 onClick={() => {
                   setMode(!mode);
                 }}
@@ -130,7 +129,6 @@ export default function Home() {
                 className="flex items-center"
                 aria-label="Mostrar/Esconder instruções"
                 aria-expanded={isOpen}
-                aria-controls="history"
               >
                 <i className="ri-menu-3-line ri-xl text-white"></i>
               </button>

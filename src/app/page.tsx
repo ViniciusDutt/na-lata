@@ -28,6 +28,7 @@ export default function Home() {
     handleDragEnd,
     latas,
     TestBtn,
+    id,
   } = useLogic();
 
   return (
@@ -204,6 +205,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-4 gap-2 justify-center items-center">
             <DndContext
+              id={id}
               sensors={sensors}
               collisionDetection={closestCenter}
               onDragEnd={handleDragEnd}

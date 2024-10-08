@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import "remixicon/fonts/remixicon.css";
 import { MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { arraySwap } from "@dnd-kit/sortable";
@@ -47,6 +47,7 @@ export function useLogic() {
   const sensors = useSensors(mouseSensor, touchSensor);
   const [timer, setTimer] = useState(60);
   const [gameStart, setGameStart] = useState(false);
+  const id = useId();
 
   useEffect(() => {
     Reset();
@@ -201,6 +202,7 @@ export function useLogic() {
     TipBtn,
     handleDragEnd,
     TestBtn,
+    id,
     isOpen,
     gameMode,
     playerWin,

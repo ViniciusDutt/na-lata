@@ -12,9 +12,11 @@ export function useLogic() {
   const [today, setToday] = useState<string | null>(null);
 
   useEffect(() => {
-    setDate(dayjs());
-    setToday(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
-  }, []);
+    setDate(new Date());
+    setToday(
+      `${date?.getDate()}/${date?.getMonth() + 1}/${date?.getFullYear()}`
+    );
+  }, [date]);
 
   const [latas, setLatas] = useState([
     "lata1",

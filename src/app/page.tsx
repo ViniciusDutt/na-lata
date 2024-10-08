@@ -46,8 +46,12 @@ export default function Home() {
         title={"Parabéns!"}
         body={
           tipCount > 0
-            ? `Você completou o jogo restando ${timer} segundo(s) em ${playCount} jogada(s) com ${tipCount} dicas.`
-            : `Você completou o jogo restando ${timer} segundo(s) em ${playCount} jogada(s).`
+            ? `Você completou o jogo em ${
+                60 - timer
+              } segundo(s) com ${playCount} jogada(s) usando ${tipCount} dicas.`
+            : `Você completou o jogo em ${
+                60 - timer
+              } segundo(s) com ${playCount} jogada(s).`
         }
         Button="Novo jogo"
         onClick={() => {

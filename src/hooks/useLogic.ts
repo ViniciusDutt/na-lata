@@ -7,17 +7,15 @@ import { arraySwap } from "@dnd-kit/sortable";
 import dayjs from "dayjs";
 
 export function useLogic() {
-  const [date, setDate] = useState<Date | null>(null);
+  const [date, setDate] = useState<any>(null);
+
+  const [today, setToday] = useState<string | null>(null);
 
   useEffect(() => {
-    setDate(new Date());
+    setDate(dayjs());
+    setToday(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
   }, []);
 
-  const data = new Date();
-
-  const today = `${data.getDate()}/${
-    data.getMonth() + 1
-  }/${data.getFullYear()}`;
   const [latas, setLatas] = useState([
     "lata1",
     "lata2",

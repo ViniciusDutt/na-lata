@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Na Lata 🥫
 
-## Getting Started
+**Na Lata** is a daily puzzle game where players must restore the correct order of a **4×2 grid of cans** using logic, memory, and spatial reasoning.
 
-First, run the development server:
+Each day presents a **new unique puzzle**, encouraging short, repeatable play sessions.
+
+---
+
+## 🌐 Live Demo
+
+Play the game here:  
+👉 https://na-lata.vercel.app
+
+---
+
+## 🎮 Gameplay Overview
+
+The game starts with **8 cans placed in a randomized order**.  
+The goal is to rearrange them into their **correct positions**.
+
+Players can drag and drop cans to swap their positions until the puzzle is solved.
+
+---
+
+## 🕹️ Game Modes
+
+### ⏱️ Time Attack Mode
+- Players race against the clock
+- Every move immediately updates the number of cans in the correct position
+- The game ends when:
+  - All cans are correctly placed, or
+  - Time runs out
+
+This mode emphasizes speed and quick decision-making.
+
+---
+
+### 🎯 Limited Attempts Mode
+- Players can rearrange cans freely
+- Feedback is **not shown immediately**
+- Players must click a **check button** to see how many cans are in the correct position
+- The player has **15 total attempts** to find the correct arrangement
+
+This mode focuses on strategy, deduction, and planning.
+
+---
+
+## 📅 Daily Puzzle Logic
+
+- Each day generates a **new fixed puzzle**
+- The puzzle order is based on the **current date**, acting as a deterministic seed
+- This guarantees:
+  - One unique puzzle per day
+  - The same solution for all players on that day
+
+---
+
+## 🧩 Features
+
+- Drag & drop interactions
+- Two distinct gameplay modes
+- Daily puzzle system
+- Immediate vs delayed feedback mechanics
+- Clean, responsive UI
+
+---
+
+## 🧪 Tech Stack
+
+- **Next.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **@dnd-kit** (drag and drop)
+
+---
+
+## 🚀 Getting Started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
